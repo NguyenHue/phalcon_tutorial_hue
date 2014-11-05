@@ -2,24 +2,25 @@
 
 class UserController extends ControllerBase
 {
-    public function signupAction()
-    {
-        
-    }
     public function registerAction()
     {
-        $user = new Users();
-        // Store and check for errors
-        $success = $user->save(
-            $this->request->getPost(),
-            array('name', 'email')
-        );
+        if ($this->request->isPost()) {
+            $user = new Users();
+            // Store and check for errors
+            $success = $user->save(
+                $this->request->getPost(),
+                array('name', 'email')
+            );
 
-        if ($success) {
-            $this->response->redirect("user/index?page=1");
-        } else {
-            foreach ($user->getMessages() as $message) {
-                $this->view->setVar("message", $message);
+            if ($success) {
+                $this->response->redirect("user/index?page=1");
+            } else {
+                $errorMessage = array();
+                foreach ($user->getMessages() as $message) {
+                    $errorMessage[] = $message->getMessage();
+                }
+                $this->view->setVar("errorMessage", $errorMessage);
+
             }
         }
     }
