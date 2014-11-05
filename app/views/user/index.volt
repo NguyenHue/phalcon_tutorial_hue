@@ -15,9 +15,9 @@
         {% endfor %}
     </table>
     {% if page.total_pages > 1 %}
-        <a href="/user/index?page=1">First</a>
-        <a href="/user/index?page={{page.before}}">Previous</a>
-        <a href="/user/index?page={{page.next}}">Next</a>
-        <a href="/user/index?page={{page.last}}">Last</a>
+        {{ link_to('user/index?page=1', 'First') }}
+        {{ link_to('user/index?page=' ~ page.before, 'Previous') }}
+        {{ link_to('user/index?page=' ~ page.next, 'Next') }}
+        {{ link_to('user/index?page=' ~ page.last, 'Last') }}
         <p>You are in page {{page.current}} of {{ page.total_pages }}</p>
     {% endif %}

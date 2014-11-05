@@ -21,11 +21,11 @@ class Users extends Model
         )));
         $this->validate(new PresenceOf(array(
             'field' => 'email',
-            'message' => 'The e-mail is not required'
+            'message' => 'Email is not required'
         )));
         $this->validate(new Email(array(
             'field' => 'email',
-            'message' => 'The e-mail is not valid'
+            'message' => 'Email is not valid'
         )));
         if ($this->validationHasFailed() == true) {
                 return false;
